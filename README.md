@@ -9,3 +9,4 @@ This repository was created with an aim to show how to find and use dataset for 
  - Selenium dataset downloader explanation
  - gui overview
  - struggles and problems, occured in the process
+ - X dataset origins : https://www.kaggle.com/datasets/splcher/animefacedataset/data
