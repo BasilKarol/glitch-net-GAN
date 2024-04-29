@@ -69,7 +69,3 @@ for im_num in range(1, 500):
             glitch_img.save(SAVE_PATH)
         except:
             print(f'Error while trying to click ({im_num}, {im_column}) image')
-
-
-
-
