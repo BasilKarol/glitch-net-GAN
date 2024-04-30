@@ -38,6 +38,7 @@ while Scroll_flag:
     except:
         pass
     try:
+        # Clicking on 'load more images' button
         driver.find_element_by_xpath('//*[@id="bop_container"]/div[2]/a').click()
     except:
         pass
@@ -46,7 +47,7 @@ while Scroll_flag:
     last_height = new_height    
 
 im_index = 0
-for im_row in range(1, 5):
+for im_row in range(1, 300):
     for im_column in range(1, 7):
         try:
             image_xpath = f'//*[@id="mmComponent_images_2"]/ul[{im_row}]/li[{im_column}]/div/div[1]/a/div/img'
