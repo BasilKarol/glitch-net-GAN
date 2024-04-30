@@ -4,9 +4,9 @@
   <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white"/>
 </p>
 
-# glitch-net-GAN
+# Glitch-net art application  
 
-### Building custom images dataset using basic web-scrapping techniques (**Selenium**) and testing it with CycleGAN (**PyTorch**).
+### Building custom images dataset using basic web-scrapping techniques with **Selenium** and testing it with CycleGAN, implemented in **PyTorch**.
 
 <p align="center">
     <img src="./dataset/rm_downloaded_imgs.png" />
