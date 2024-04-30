@@ -114,6 +114,7 @@ These are the main **issues** I've faced, some of which have been resolved while
 You can test my Glitch-net app through a user-friendly GUI! There, you can easily apply one of the following _glitch styles_ to your photo:
  - **Light, Medium and Hard** modes, each with different scale of glitch intensity
  - **Art** mode with kind of unpredictable glitch effect (sometimes similar to the **Hard** one)
+ - 
 <p align="center">
 	<img src="./dataset/rm_GUI.png" />
 </p>
