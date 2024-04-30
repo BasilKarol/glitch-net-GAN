@@ -27,7 +27,7 @@ box.send_keys(Keys.ENTER)
 
 # Will keep scrolling down the webpage until it cannot scroll no more
 last_height = driver.execute_script('return document.body.scrollHeight')
-Scroll_flag = True
+Scroll_flag = False
 while Scroll_flag:
     driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
     time.sleep(2)
@@ -46,18 +46,22 @@ while Scroll_flag:
     last_height = new_height    
 
 im_index = 0
-for im_num in range(1, 500):
+for im_num in range(1, 5):
     for im_column in range(1, 7):
         try:
             image_xpath = f'//*[@id="mmComponent_images_2"]/ul[{im_num}]/li[{im_column}]/div/div[1]/a/div/img'
-            # driver.find_element_by_xpath(image_xpath).click()
+            driver.find_element_by_xpath(image_xpath).click()
             SAVE_PATH = f'D:\Python_Work\glitch_net\dataset\girls\{str(im_index)}.png'
             driver.find_element_by_xpath(image_xpath).screenshot(SAVE_PATH)
 
             im_index += 1
 
             # Trying to locate full size image's thumbnail instead of a preview:
-            # try: 
+            # try:
+            #     time.sleep(3)
+            #     full_img_button = '//*[@id="actionbar"]/ul/li[3]/div' 
+            #     driver.find_element_by_xpath(full_img_button).click()
+
             #     full_im_xpath = '//*[@id="mainImageWindow"]/div[2]/div/div/div/img'
             #     SAVE_PATH = f'D:\Python_Work\glitch_net\dataset\girls\{str(im_num)}.png'
             #     driver.find_element_by_xpath(full_im_xpath).screenshot(SAVE_PATH)
