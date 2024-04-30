@@ -1,4 +1,4 @@
-![image](https://github.com/BasilKarol/glitch-net-GAN/assets/74207181/19cbf0a3-cc3a-48c8-be58-41bd814e5815)<p align="center">
+<p align="center">
 	<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
 	<img src="https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white"/>
   <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white"/>
@@ -124,6 +124,7 @@ _You can check more examples of usage clicking on ```?``` button:_
 </p>
 
 Experiment with my app as well as with Selenium methods to get the best results in generating and web scrapping different stuff! 
+
 
 ## References <a name='refs'/></a>
 
