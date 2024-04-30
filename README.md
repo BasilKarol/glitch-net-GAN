@@ -6,10 +6,10 @@
 
 # glitch-net-GAN
 
-### Building custom images dataset using basic web-scrapping technuqies (**Selenium**) and testing it with CycleGAN (**Pytorch**).
+### Building custom images dataset using basic web-scrapping techniques (**Selenium**) and testing it with CycleGAN (**PyTorch**).
 
 <p align="center">
-	<img src="./dataset/rm_downloaded_imgs.png" />
+    <img src="./dataset/rm_downloaded_imgs.png" />
 </p>
 
 # Table of contents:
@@ -20,20 +20,22 @@
 * [References](#refs)
 
 ## Overview <a name="overview"/></a>
-This repo was created with an aim to show how to create custom dataset of images from the internet. 
-There are a lot of datasets with different types and themes of data, as well as various quality. If you struggle with looking for one for your personal project, I do reccomend you to visit Kaggle, where you can find thousands of datasets. 
+This repo was created with the aim of demonstrating how to create a custom dataset of images from the internet. 
+There are numerous datasets available, encompassing different types, themes, and varying quality levels. If you're having difficulty finding one for your personal project, I recommend visiting Kaggle, where you can access thousands of datasets
 
-Hovewer, sometimes data that you need is too specific to find it well-prepared on some sources. In my example, I needed images represented _glitchcore_ effect for my class project. And there wasnt datasets with such images, but at the same time I could easily find one on the internet, just typing in search bar of Google images smth like _glitchcore aesthetics_. Well, that's exactly what we are gonna do here.
+However, sometimes the data you need is too specific to be well-prepared on certain sources. In my example, I needed images representing the glitchcore effect for my class project. 
+Well, there weren't datasets with such images, yet I could easily find them on the internet simply by searching Google Images for terms like 'glitchcore aesthetics.' That's precisely what we're going to do here.
+
 
 ## Code details & Issues to solve <a name='code-details'/></a>
-To implement the automatization of images search&download, we'll need:
- - **Selenium** for main parts of this scrpit
- - **WebDriver Manager**, that will automatically download webdriver that we'll use for automatization task
- - **PIL** - pillow package for working and editing images in Python
+To implement the automation of image search and download, we'll need:
+ - **Selenium** for the main parts of this script;
+ - **WebDriver Manager**, which will automatically download webdriver that we'll use for automatization task;
+ - **PIL (Python Imaging Library)**, a package for working with and editing images in Python.
 
-Talking about Selenium - this library is actually pretty easy to use because of the fact, that it actually imitates users interaction with the browser. So all you need to do to write selenium code logic is to think, what you've did to find and image? 
+Talking about Selenium - this library is actually pretty easy to use because it imitates users' interactions with the browser. So, all you need to do to write Selenium code logic is to think about what you did to find an image.
 
-Here is whole project step-by-step logic translated into language of Selenium:
+Here is the whole project's step-by-step logic translated into the language of Selenium:
 1) Open Broswer
 ```python
 # Setting selenium's driver and basic URLs
@@ -44,7 +46,7 @@ driver = webdriver.Chrome(chromedriver)
 ```python
 driver.get(EDGE_IMAGES_URL)
 ```
-3) Choose _reject_ on annoying cookies premission
+3) Choose _reject_ on annoying cookies permission
 ```python
 ##close edges's cookies premission
 time.sleep(2)
@@ -77,41 +79,40 @@ glitch_img  = glitch_img.resize((ImgSize, ImgSize))
 glitch_img.save(SAVE_PATH)
 ```
 
-The main tricky parts here are _**time**_ module usage and the meaning of _magic_ _**XPath**_ values. 
+The main tricky parts here are the usage of _**time**_ module and the meaning of _magic_ _**XPath**_ values. 
 
-We need to use _time_ module because of how web -drivers and -servers work. Apparently, almost every object on the webpage need some time to load, that where ```time.sleep(sec)``` will help.
-And what about these **_XPath_** adresses? These are the **links**, or **ids** if you prefer, that we'll use for Selenium navigation.
+We need to use _time_ module because of how web drivers and servers work. Apparently, almost every object on the webpage needs some time to load, and that's where ```time.sleep(sec)``` will help.
+And what about these **_XPath_** addresses? These are the **links**, or **ids** if you prefer, that we'll use for Selenium navigation.
 
-_Where to find and copy these XPath id's?_ To do that, all you need is the Developer Mode (F12) with Inspect Button (Ctrl+Shift+C) to find html representation of the object.
+_Where to find and copy these XPath ids?_ To do that, all you need is the Developer Mode (F12) with the Inspect Button (Ctrl+Shift+C) to find the HTML representation of the object.
 
 <p align="center">
 	<img src="./dataset/rm_inspect.png" />
 </p>
 
-After you've found all the element's adresses to interact with them, all you have to do is to easily interact with them through Selenium's API. 
+After you've found all the element addresses to interact with them, all you have to do is to easily interact with them through Selenium's API. 
 
 _Or is it_?
 
 
 ## Issues to solve <a name='issues'/></a>
 
-These are the main issues I've faced (resolved and not at all):
-1.	**Webdriver doesnt see browser as you are.** Even if you'll klick on the web-page's element and copy it's XPath, it doesnt guarantee that Selenium will see it.
+These are the main **issues** I've faced, some of which have been resolved while others have not.:
+1.	**Webdriver doesn't see browser as you are.** Even if you'll click on the web-page's element and copy its XPath, it doesnt guarantee that Selenium will see it.
 
-  	Often you'll face the ```no such element: Unable to locate element``` error because of the fact, that object in which you are interested is overlaped by another web-object. For example. because of this one issue I had to write code in step 3) to close 'cookies premission' window.
+  	Often you'll face the ```no such element: Unable to locate element``` error because of the fact, that object in which you are interested is overlapped by another web-object. For example, due to this issue, I had to write code in step 3) to close the 'cookies permission' window. 
 
-  	Another example (depressive one): Selenium script presented in this repo can only take screenshots from Images previews, not downloading full-size images. And yes, that's because I couldnt find a way to get over Image's overlay cantainer.
+  	Another example (a frustrating one): the Selenium script presented in this repository can only take screenshots of image previews, not download full-size images.  And yes, that's because I couldn't find a way to bypass the image's overlay container.
     
-3.	**Sometimes, it's just easier to swith to another browser.**  Originally, I was testing my script via Chrome webdriver. Hovewer, after trying to navigate to an image in google, I realized that they dont have proper indexing in their XPath.
-    So in the end, I just wasnt able to write fine-looking ```for loop``` with f-string inside of it.
-
-  	The solution? Just swith to Bing's images. They do work in a way you expect them to :) 
+3.	**Sometimes, it's just easier to swith to another browser.**  Originally, I was testing my script via Chrome webdriver.  However, after attempting to navigate to an image on Google, I realized that they don't have proper indexing in their XPath. So, in the end, I wasn't able to write a well-functioning ```for loop``` with an ```f-string``` inside of it.
+	
+ 	The solution? Just switch to Bing's images. They work in the way you expect them to. :)
 
 
 ## Glitch-net's GUI <a name='GUI'/></a>
 
-You can test my Glitch-net app through user-friendly GUI! There, you can easily apply one of the following _glitch styles_ to your photo:
- - **Light, Medium and Hard** modes, each with different scale of glitch-intensity
+You can test my Glitch-net app through a user-friendly GUI! There, you can easily apply one of the following _glitch styles_ to your photo:
+ - **Light, Medium and Hard** modes, each with different scale of glitch intensity
  - **Art** mode with kind of unpredictable glitch effect (sometimes similar to the **Hard** one)
 <p align="center">
 	<img src="./dataset/rm_GUI.png" />
@@ -123,7 +124,7 @@ _You can check more examples of usage clicking on ```?``` button:_
 	<img src="./dataset/rm_help.png" />
 </p>
 
-Experiment with my app as well as with Selenium methods to get the best results in generating and web scrapping different stuff! 
+Experiment with my app as well as with Selenium methods to get the best results in generating and web scraping different stuff! 
 
 
 ## References <a name='refs'/></a>
