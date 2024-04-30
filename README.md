@@ -104,10 +104,28 @@ These are the main **issues** I've faced, some of which have been resolved while
 
   	Another example (a frustrating one): the Selenium script presented in this repository can only take screenshots of image previews, not download full-size images.  And yes, that's because I couldn't find a way to bypass the image's overlay container.
     
-3.	**Sometimes, it's just easier to swith to another browser.**  Originally, I was testing my script via Chrome webdriver.  However, after attempting to navigate to an image on Google, I realized that they don't have proper indexing in their XPath. So, in the end, I wasn't able to write a well-functioning ```for loop``` with an ```f-string``` inside of it.
+2.	**Sometimes, it's just easier to swith to another browser.**  Originally, I was testing my script via Chrome webdriver.  However, after attempting to navigate to an image on Google, I realized that they don't have proper indexing in their XPath. So, in the end, I wasn't able to write a well-functioning ```for loop``` with an ```f-string``` inside of it.
 	
  	The solution? Just switch to Bing's images. They work in the way you expect them to. :)
 
+3. 	**Scroll, and scroll, and...** Not all the images are instantly loaded when you are googling something. When interacting with a large number of images (~300 in my example), you'll want to get to the bottom of you browser for 100% of information.
+  	To achieve that, I wrote an _auto-scroll_ script that will continuously scroll down the webpage until no more images are loaded:
+```python
+last_height = driver.execute_script('return document.body.scrollHeight')
+Scroll_flag = False
+while Scroll_flag:
+    driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
+    time.sleep(2)
+    new_height = driver.execute_script('return document.body.scrollHeight')
+    try:
+        driver.find_element_by_xpath('//*[@id="islmp"]/div/div/div/div/div[5]/input').click()
+        time.sleep(2)
+    ...
+    try:
+	# Clicking on 'load more images' button
+        driver.find_element_by_xpath('//*[@id="bop_container"]/div[2]/a').click()
+    ...
+```
 
 ## Glitch-net's GUI <a name='GUI'/></a>
 
