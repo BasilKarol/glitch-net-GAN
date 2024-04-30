@@ -1,4 +1,4 @@
-<p align="center">
+![image](https://github.com/BasilKarol/glitch-net-GAN/assets/74207181/19cbf0a3-cc3a-48c8-be58-41bd814e5815)<p align="center">
 	<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
 	<img src="https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white"/>
   <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white"/>
@@ -14,7 +14,9 @@
 
 # Table of contents:
 * [Overview](#overview)
-* [Code details & Issues to solve](#code-details)
+* [Code details](#code-details)
+* [Issues to solve](#issues)
+* [Glitch-net's GUI](#GUI)
 * [References](#refs)
 
 ## Overview <a name="overview"/></a>
@@ -80,20 +82,52 @@ The main tricky parts here are _**time**_ module usage and the meaning of _magic
 We need to use _time_ module because of how web -drivers and -servers work. Apparently, almost every object on the webpage need some time to load, that where ```time.sleep(sec)``` will help.
 And what about these **_XPath_** adresses? These are the **links**, or **ids** if you prefer, that we'll use for Selenium navigation.
 
-_Where to find and copy these XPath id's?_ To do that, all you need is Developer Mode (F12) with Intersect Button (Ctrl+Shift+C)
+_Where to find and copy these XPath id's?_ To do that, all you need is the Developer Mode (F12) with Inspect Button (Ctrl+Shift+C) to find html representation of the object.
 
 <p align="center">
 	<img src="./dataset/rm_inspect.png" />
 </p>
 
-_NOTE: You can find my implementation of CycleGAN architecture with examples in my ani-CycleGAN repo._
+After you've found all the element's adresses to interact with them, all you have to do is to easily interact with them through Selenium's API. 
+
+_Or is it_?
+
+
+## Issues to solve <a name='issues'/></a>
+
+These are the main issues I've faced (resolved and not at all):
+1.	**Webdriver doesnt see browser as you are.** Even if you'll klick on the web-page's element and copy it's XPath, it doesnt guarantee that Selenium will see it.
+
+  	Often you'll face the ```no such element: Unable to locate element``` error because of the fact, that object in which you are interested is overlaped by another web-object. For example. because of this one issue I had to write code in step 3) to close 'cookies premission' window.
+
+  	Another example (depressive one): Selenium script presented in this repo can only take screenshots from Images previews, not downloading full-size images. And yes, that's because I couldnt find a way to get over Image's overlay cantainer.
+    
+3.	**Sometimes, it's just easier to swith to another browser.**  Originally, I was testing my script via Chrome webdriver. Hovewer, after trying to navigate to an image in google, I realized that they dont have proper indexing in their XPath.
+    So in the end, I just wasnt able to write fine-looking ```for loop``` with f-string inside of it.
+
+  	The solution? Just swith to Bing's images. They do work in a way you expect them to :) 
+
+
+## Glitch-net's GUI <a name='GUI'/></a>
+
+You can test my Glitch-net app through user-friendly GUI! There, you can easily apply one of the following _glitch styles_ to your photo:
+ - **Light, Medium and Hard** modes, each with different scale of glitch-intensity
+ - **Art** mode with kind of unpredictable glitch effect (sometimes similar to the **Hard** one)
+<p align="center">
+	<img src="./dataset/rm_GUI.png" />
+</p>
+
+_You can check more examples of usage clicking on ```?``` button:_
+
+<p align="center">
+	<img src="./dataset/rm_help.png" />
+</p>
+
+Experiment with my app as well as with Selenium methods to get the best results in generating and web scrapping different stuff! 
 
 ## References <a name='refs'/></a>
+
 Links to resources that were used in the project:
  - [Anime face dataset](https://www.kaggle.com/datasets/splcher/animefacedataset/data) to train CycleGAN generator
  - [Medium article](https://medium.com/@dian.octaviani/method-1-4-automation-of-google-image-scraping-using-selenium-3972ea3aa248) about Selenium
  - [My implementation of CycleGAN](https://github.com/BasilKarol/ani-CycleGAN) architecture that was used as glitch-net Generator
-
-## ToDo:
- - gui overview
- - struggles and problems, occured in the process
